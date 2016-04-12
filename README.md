@@ -63,11 +63,9 @@ Let's try this from the other side. In this release let's write a little HTTP _s
 
 You won't be using your HTTP client in this release, we'll test our server by connecting to it with Google Chrome (our favorite HTTP client).
 
-### Requirements
+### The Response Format
 
-Your server should run on port 2000. You can tell Chrome to visit it by going to the url  `http://127.0.0.1:2000/` once you have it up and running.
-
-The _simplest_ response your server can send is a classic `200 OK`, which says "I have the thing you're looking for, here you go."
+The _simplest_ response your server can send is a classic `200 OK`, which says "I have the thing you're looking for, here you go." Here's an example of an HTTP response string:
 
 ```
 HTTP/1.1 200 OK
@@ -86,13 +84,24 @@ Content-Length: 130
 As you can see, the format of a `200` response needs (at least) three pieces.
 
  * The response line indicating that this is, in fact, a `200` response
- * A line specifying the length of the content that will be sent back in characters (bytes)
+ * A header specifying the length of the content that will be sent back in characters (bytes)
  * An empty line
  * A series of lines representing the content.
+
+In our example, we see:
+
+ * Line 1: A 200 OK response (content was found)
+ * Line 2: A header specifiying the number of characters in our response below the empty line
+ * Line 3: An empty line to signal the end of our headers and the beginning of our content
+ * Lines 4 to end: The body of our response
 
 If your TCP server is sending the example above correctly, you should be able to visit your server in Chrome and see the web page!
 
 Watch out for the Content-Length, it's easy to mess up. All characters, including indentation, will count towards the total Content-Length. Whatever the number is, it must match _exactly_ the number of characters you're sending after the empty line.
+
+### Requirements
+
+Your server should run on port 2000. You can tell Chrome to visit it by going to the url  `http://127.0.0.1:2000/` once you have it up and running.
 
 ## Release 3, Expand the Server
 
