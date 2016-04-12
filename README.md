@@ -19,25 +19,31 @@ You already know what TCP connections are, and you know how to send text over th
 An HTTP client sends HTTP _requests_ to an HTTP server. In this exercise we're going to build our own HTTP client and fetch a webpage by connecting to a webserver on the internet and sending it a properly formatted request.
 
 ### The Request Format
-Let's talk about the "specific format" of an HTTP request. An HTTP request is a chunk of text (a string) that is composed of:
-
- * The resource (URL) being requested
- * A series of headers, one per line
- * A blank line
-
-Here's an HTTP request that fetches `http://devbootcamp.com/locations/chicago`.
+Let's talk about the "specific format" of an HTTP request. Here's an example of an HTTP request string:
 
    ```
    GET /locations/chicago HTTP/1.1
    Host: devbootcamp.com
+   Accept: text/html
 
    ```
 
-In this example, we see a `GET` request to fetch `/locations/chicago` (Line 1), followed by a _header_ that names the host we're talking to (Line 2), followed by an empty line (Line 3).
+As you can see, an HTTP request is a chunk of text (a string) that is composed of:
+
+ * The resource (URL) being requested
+ * Zero or more headers (Key: value)
+ * A blank line
+
+In this example, we see:
+
+ * Line 1: A `GET` request to fetch `/locations/chicago`
+ * Line 2: A _header_ that names the host we're talking to.
+ * Line 3: Another header that says what kind of content we want (html)
+ * Line 4: an empty line signaling that our request is done
 
 Don't forget that empty line! It's what signals to the server that you're done sending your request and would like to receive a response.
 
-The text you see above is the same text your browser sends to the `devbootcamp.com` server over TCP when you visit http://devbootcamp.com/locations/chicago. There's no magic here, the web is just a matter of formatting text-based requests and responses correctly so that everybody can communicate.
+The text you see in the example is the same text your browser sends to the `devbootcamp.com` server over TCP when you visit http://devbootcamp.com/locations/chicago. There's no magic here, the web is just a matter of formatting text-based requests and responses correctly so that everybody can communicate.
 
 There are many different kinds of HTTP request types but the simplest of all is the humble `GET` we see above. `GET` just says "give me this thing I'm looking for." A `GET` is what happens every time you type a URL into your browser.
 
